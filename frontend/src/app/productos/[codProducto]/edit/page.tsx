@@ -2,15 +2,7 @@
 
 import { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-// Asume que estas funciones están en tu archivo api.ts
 import { getProducto, updateProducto, Producto } from '@/lib/api';
-
-// Define una interfaz para los props que recibe este componente (el ID del producto)
-interface EditProductoPageProps {
-  params: {
-    codProducto: string; // El ID del producto viene de la URL como string
-  };
-}
 
 // Define una interfaz para el estado del formulario, similar a Producto pero con los valores como string para los inputs
 interface ProductoForm {
@@ -19,9 +11,9 @@ interface ProductoForm {
   stockProducto: string;
 }
 
-export default function EditarProducto({ params }: EditProductoPageProps) {
+export default function EditarProducto({ params }: { params: { codProducto: string } }) {
   const router = useRouter();
-  const { codProducto } = params; // Obtiene el ID del producto de los parámetros de la URL
+  const { codProducto } = params;
   const [form, setForm] = useState<ProductoForm>({ nomPro: '', precioProducto: '', stockProducto: '' });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
