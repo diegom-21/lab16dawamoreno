@@ -2,8 +2,7 @@
   "name": "conexion_backend_frontend_01",
   "version": "1.0.0",
   "scripts": {
-    "install": "cd backend && npm install && cd ../frontend && npm install",
-    "build": "npm run build --prefix frontend",
+    "build": "cd frontend && npm install && npm run build",
     "start": "NODE_ENV=production node backend/index.js"
   },
   "dependencies": {
