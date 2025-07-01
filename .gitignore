@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+
+# Next.js build
+.next/
+out/
+
+# Logs
+*.log
+logs/
+
+# Sistema operativo
+.DS_Store
+
+# Variables de entorno
+.env
+
+# Render cache
+render-build/
