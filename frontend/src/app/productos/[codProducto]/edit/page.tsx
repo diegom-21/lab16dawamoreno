@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, ChangeEvent, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { getProducto, updateProducto, Producto } from '@/lib/api';
 
 // Define una interfaz para el estado del formulario, similar a Producto pero con los valores como string para los inputs
@@ -11,9 +11,10 @@ interface ProductoForm {
   stockProducto: string;
 }
 
-export default function EditarProducto({ params }: { params: { codProducto: string } }) {
+export default function EditarProducto() {
   const router = useRouter();
-  const { codProducto } = params;
+  const params = useParams();
+  const codProducto = params.codProducto ? (Array.isArray(params.codProducto) ? params.codProducto[0] : params.codProducto) : '';
   const [form, setForm] = useState<ProductoForm>({ nomPro: '', precioProducto: '', stockProducto: '' });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -51,6 +52,7 @@ export default function EditarProducto({ params }: { params: { codProducto: stri
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!codProducto) return;
 
     // Asegúrate de parsear a los tipos correctos antes de enviar
     const productoActualizado: Omit<Producto, 'codProducto'> = {
